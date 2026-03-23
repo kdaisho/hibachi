@@ -1,27 +1,23 @@
 <script lang="ts">
-	import type {
-		StandardLonghandProperties,
-		StandardProperties,
-		StandardShorthandProperties
-	} from 'csstype';
-	import { styleToString } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends Omit<HTMLAttributes<HTMLTableCellElement>, 'style'> {
-		style?: StandardLonghandProperties & StandardProperties & StandardShorthandProperties;
+	import { styleToString } from '$lib/utils';
+
+	interface Props extends Omit<HTMLAttributes<HTMLTableCellElement>, 'style'> {
+		style?: Record<string, string | number | null>;
+		children?: Snippet;
 	}
 
-	export let style: $$Props['style'] = {};
-	let className: string | undefined = undefined;
-	export { className as class };
+	let { style = {}, class: className, children, ...rest }: Props = $props();
 
-	const styleDefault = {
+	const styleDefault = $derived({
 		display: 'inline-flex',
 		justifyContent: 'center',
 		alignItems: 'center',
 		...style
-	};
+	});
 </script>
 
-<td style={styleToString(styleDefault)} role="presentation" {...$$restProps} class={className}>
-	<slot />
+<td style={styleToString(styleDefault)} role="presentation" {...rest} class={className}>
+	{@render children?.()}
 </td>

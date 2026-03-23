@@ -1,20 +1,16 @@
 <script lang="ts">
-	import type {
-		StandardLonghandProperties,
-		StandardProperties,
-		StandardShorthandProperties
-	} from 'csstype';
-	import { styleToString } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends Omit<HTMLAttributes<HTMLBodyElement>, 'style'> {
-		style?: StandardLonghandProperties & StandardShorthandProperties & StandardProperties;
+	import { styleToString } from '$lib/utils';
+
+	interface Props extends Omit<HTMLAttributes<HTMLBodyElement>, 'style'> {
+		style?: Record<string, string | number | null>;
+		children?: Snippet;
 	}
 
-	export let style = {};
-	let className: string | undefined = undefined;
-	export { className as class };
+	let { style = {}, class: className, children, ...rest }: Props = $props();
 </script>
 
-<body {...$$restProps} style={styleToString(style)} class={className} >
-	<slot />
+<body {...rest} style={styleToString(style)} class={className}>
+	{@render children?.()}
 </body>

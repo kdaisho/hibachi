@@ -1,30 +1,24 @@
 <script lang="ts">
-	import type {
-		StandardLonghandProperties,
-		StandardProperties,
-		StandardShorthandProperties
-	} from 'csstype';
-	import { styleToString } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends Omit<HTMLAttributes<HTMLAnchorElement>, 'style'> {
-		style?: StandardLonghandProperties & StandardShorthandProperties & StandardProperties;
+	import { styleToString } from '$lib/utils';
+
+	interface Props extends Omit<HTMLAttributes<HTMLAnchorElement>, 'style'> {
+		style?: Record<string, string | number | null>;
 		target?: string;
-		href: string;
+		href?: string;
+		children?: Snippet;
 	}
 
-	export let style: $$Props['style'] = {};
-	let className: string | undefined = undefined;
-	export { className as class };
-	export let target = '_blank';
-	export let href = '';
+	let { style = {}, class: className, target = '_blank', href = '', children, ...rest }: Props = $props();
 
-	const styleDefault = {
+	const styleDefault = $derived({
 		color: '#067df7',
 		textDecoration: 'none',
 		...style
-	};
+	});
 </script>
 
-<a {...$$restProps} {href} {target} style={styleToString(styleDefault)} class={className}>
-	<slot />
+<a {...rest} {href} {target} style={styleToString(styleDefault)} class={className}>
+	{@render children?.()}
 </a>

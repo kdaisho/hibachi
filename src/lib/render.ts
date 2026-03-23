@@ -1,29 +1,27 @@
 import { convert } from 'html-to-text';
 import pretty from 'pretty';
-import type { ComponentProps, ComponentType, SvelteComponent } from 'svelte';
+import { render as svelteRender } from 'svelte/server';
+import type { Component } from 'svelte';
 
-export const render = <Component extends SvelteComponent>({
+export const render = ({
 	template,
 	props,
 	options
 }: {
-	template: ComponentType<Component>;
-	props?: ComponentProps<Component>;
+	template: Component<any>;
+	props?: Record<string, any>;
 	options?: {
 		plainText?: boolean;
 		pretty?: boolean;
 	};
-}) => {
-	const { html } =
-		// @ts-ignore
-		template.render(props);
+}): string => {
+	const { body } = svelteRender(template, { props });
 	if (options?.plainText) {
-		return renderAsPlainText(html);
+		return renderAsPlainText(body);
 	}
 	const doctype =
 		'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-	const markup = html;
-	const document = `${doctype}${markup}`;
+	const document = `${doctype}${body}`;
 	if (options?.pretty) {
 		return pretty(document);
 	}

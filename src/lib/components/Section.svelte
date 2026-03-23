@@ -1,23 +1,19 @@
 <script lang="ts">
-	import type {
-		StandardLonghandProperties,
-		StandardProperties,
-		StandardShorthandProperties
-	} from 'csstype';
-	import { styleToString } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends Omit<HTMLAttributes<HTMLTableElement>, 'style'> {
-		style?: StandardLonghandProperties & StandardProperties & StandardShorthandProperties;
+	import { styleToString } from '$lib/utils';
+
+	interface Props extends Omit<HTMLAttributes<HTMLTableElement>, 'style'> {
+		style?: Record<string, string | number | null>;
+		children?: Snippet;
 	}
 
-	export let style: $$Props['style'] = {};
-	let className: string | undefined = undefined;
-	export { className as class };
+	let { style = {}, class: className, children, ...rest }: Props = $props();
 
-	const styleDefaultTable = {
+	const styleDefaultTable = $derived({
 		width: '100%',
 		...style
-	};
+	});
 
 	const styleDefaultTr = {
 		display: 'grid',
@@ -30,15 +26,15 @@
 	style={styleToString(styleDefaultTable)}
 	align="center"
 	border={0}
-	cellPadding={0}
-	cellSpacing={0}
+	cellpadding={0}
+	cellspacing={0}
 	role="presentation"
-	{...$$restProps}
+	{...rest}
 	class={className}
 >
 	<tbody>
 		<tr style={styleToString(styleDefaultTr)}>
-			<slot />
+			{@render children?.()}
 		</tr>
 	</tbody>
 </table>

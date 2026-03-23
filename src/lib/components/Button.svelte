@@ -1,31 +1,23 @@
 <script lang="ts">
-	import type {
-		StandardLonghandProperties,
-		StandardProperties,
-		StandardShorthandProperties
-	} from 'csstype';
-	import { pxToPt, styleToString } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends Omit<HTMLAttributes<HTMLAnchorElement>, 'style'> {
-		style?: StandardProperties & StandardLonghandProperties & StandardShorthandProperties;
-		href: string;
+	import { pxToPt, styleToString } from '$lib/utils';
+
+	interface Props extends Omit<HTMLAttributes<HTMLAnchorElement>, 'style'> {
+		style?: Record<string, string | number | null>;
+		href?: string;
 		target?: string;
 		pX?: number;
 		pY?: number;
+		children?: Snippet;
 	}
 
-	export let href = '';
-	export let style = {};
-	let className: string | undefined = undefined;
-	export { className as class };
-	export let pX = 0;
-	export let pY = 0;
-	export let target = '_blank';
+	let { href = '', style = {}, class: className, pX = 0, pY = 0, target = '_blank', children, ...rest }: Props = $props();
 
-	const y = pY * 2;
-	const textRaise = pxToPt(y.toString());
+	const y = $derived(pY * 2);
+	const textRaise = $derived(pxToPt(y.toString()));
 
-	const buttonStyle = (style?: Record<string, string | number> & { pY?: number; pX?: number }) => {
+	const buttonStyle = (style: Record<string, string | number | null> & { pY?: number; pX?: number }) => {
 		const paddingY = style?.pY || 0;
 		const paddingX = style?.pX || 0;
 
@@ -39,9 +31,7 @@
 		};
 	};
 
-	const buttonTextStyle = (
-		style?: Record<string, string | number | null> & { pY?: number; pX?: number }
-	) => {
+	const buttonTextStyle = (style: Record<string, string | number | null> & { pY?: number; pX?: number }) => {
 		const paddingY = style?.pY || 0;
 
 		return {
@@ -57,12 +47,12 @@
 	};
 </script>
 
-<a {...$$restProps} {href} {target} style={styleToString(buttonStyle({ ...style, pX, pY }))} class={className}>
+<a {...rest} {href} {target} style={styleToString(buttonStyle({ ...style, pX, pY }))} class={className}>
 	<span>
 		{@html `<!--[if mso]><i style="letter-spacing: ${pX}px;mso-font-width:-100%;mso-text-raise:${textRaise}" hidden>&nbsp;</i><![endif]-->`}
 	</span>
 	<span style={styleToString(buttonTextStyle({ ...style, pX, pY }))}>
-		<slot />
+		{@render children?.()}
 	</span>
 	<span>
 		{@html `<!--[if mso]><i style="letter-spacing: ${pX}px;mso-font-width:-100%" hidden>&nbsp;</i><![endif]-->`}

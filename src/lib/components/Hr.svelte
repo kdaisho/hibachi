@@ -1,25 +1,19 @@
 <script lang="ts">
-	import type {
-		StandardLonghandProperties,
-		StandardProperties,
-		StandardShorthandProperties
-	} from 'csstype';
-	import { styleToString } from '$lib/utils';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends Omit<HTMLAttributes<HTMLHRElement>, 'style'> {
-		style?: StandardLonghandProperties & StandardProperties & StandardShorthandProperties;
+	import { styleToString } from '$lib/utils';
+
+	interface Props extends Omit<HTMLAttributes<HTMLHRElement>, 'style'> {
+		style?: Record<string, string | number | null>;
 	}
 
-	export let style: $$Props['style'] = {};
-	let className: string | undefined = undefined;
-	export { className as class };
+	let { style = {}, class: className, ...rest }: Props = $props();
 
-	const styleDefault = {
+	const styleDefault = $derived({
 		width: '100%',
 		border: 'none',
 		borderTop: '1px solid #eaeaea',
 		...style
-	};
+	});
 </script>
 
-<hr style={styleToString(styleDefault)} {...$$restProps} class={className}/>
+<hr style={styleToString(styleDefault)} {...rest} class={className} />

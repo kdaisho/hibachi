@@ -1,27 +1,23 @@
 <script lang="ts">
-	import type {
-		StandardLonghandProperties,
-		StandardProperties,
-		StandardShorthandProperties
-	} from 'csstype';
-	import { styleToString } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends Omit<HTMLAttributes<HTMLParagraphElement>, 'style'> {
-		style?: StandardLonghandProperties & StandardShorthandProperties & StandardProperties;
+	import { styleToString } from '$lib/utils';
+
+	interface Props extends Omit<HTMLAttributes<HTMLParagraphElement>, 'style'> {
+		style?: Record<string, string | number | null>;
+		children?: Snippet;
 	}
 
-	export let style: $$Props['style'] = {};
-	let className: string | undefined = undefined;
-	export { className as class };
+	let { style = {}, class: className, children, ...rest }: Props = $props();
 
-	const styleDefault = {
+	const styleDefault = $derived({
 		fontSize: '14px',
 		lineHeight: '24px',
 		margin: '16px 0',
 		...style
-	};
+	});
 </script>
 
-<p style={styleToString(styleDefault)} {...$$restProps} class={className}>
-	<slot />
+<p style={styleToString(styleDefault)} {...rest} class={className}>
+	{@render children?.()}
 </p>
