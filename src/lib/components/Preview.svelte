@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { styleToString } from '$lib/utils';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends HTMLAttributes<HTMLDivElement> {
-		preview: string;
+	import { styleToString } from '$lib/utils';
+
+	interface Props extends HTMLAttributes<HTMLDivElement> {
+		preview?: string;
 	}
 
-	export let preview = '';
+	let { preview = '', ...rest }: Props = $props();
 
 	const renderWhiteSpace = (text: string) => {
 		const whiteSpaceCodes = '\xa0\u200C\u200B\u200D\u200E\u200F\uFEFF';
-		return whiteSpaceCodes.repeat(150 - text.length);
+		return whiteSpaceCodes.repeat(Math.max(0, 150 - text.length));
 	};
 </script>
 
@@ -23,7 +24,7 @@
 		maxHeight: 0,
 		maxWidth: 0
 	})}
-	{...$$restProps}
+	{...rest}
 >
 	{preview}
 	<div>

@@ -1,21 +1,17 @@
 <script lang="ts">
-	import type {
-		StandardLonghandProperties,
-		StandardProperties,
-		StandardShorthandProperties
-	} from 'csstype';
-	import { styleToString } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	interface $$Props extends Omit<HTMLAttributes<HTMLDivElement>, 'style'> {
-		style?: StandardLonghandProperties & StandardProperties & StandardShorthandProperties;
+	import { styleToString } from '$lib/utils';
+
+	interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'style'> {
+		style?: Record<string, string | number | null>;
+		children?: Snippet;
 	}
 
-	export let style: $$Props['style'] = {};
-	let className: string | undefined = undefined;
-	export { className as class };
+	let { style = {}, class: className, children, ...rest }: Props = $props();
 
-	const styles = { maxWidth: '37.5em', ...style };
-	const inlineStyle = styleToString(styles);
+	const styles = $derived({ maxWidth: '37.5em', ...style });
+	const inlineStyle = $derived(styleToString(styles));
 </script>
 
 <div>
@@ -23,8 +19,8 @@
           <table role="presentation" width="100%" align="center" style="${inlineStyle}" class="${className}"><tr><td></td><td style="width:37.5em;background:#ffffff">
         <![endif]-->`}
 </div>
-<div {...$$restProps} style={inlineStyle} class={className}>
-	<slot />
+<div {...rest} style={inlineStyle} class={className}>
+	{@render children?.()}
 </div>
 <div>
 	{@html `<!--[if mso | IE]>

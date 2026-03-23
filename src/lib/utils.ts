@@ -1,11 +1,3 @@
-export const copyTextToClipboard = async (text: string) => {
-	try {
-		await navigator.clipboard.writeText(text);
-	} catch {
-		throw new Error('Not able to copy');
-	}
-};
-
 export const pxToPt = (px: string): number | null =>
 	isNaN(Number(px)) ? null : (parseInt(px, 10) * 3) / 4;
 
@@ -39,8 +31,6 @@ const withSpace = (value: string | undefined, properties: string[]) => {
 	}, {});
 };
 
-// https://stackoverflow.com/a/61410824
-
 export const styleToString = (style: Record<string, string | number | null>) => {
 	return Object.keys(style).reduce(
 		(acc, key) =>
@@ -54,11 +44,4 @@ export const styleToString = (style: Record<string, string | number | null>) => 
 			';',
 		''
 	);
-};
-
-export const unreachable = (
-	condition: never,
-	message = `Entered unreachable code. Received '${condition}'.`
-): never => {
-	throw new TypeError(message);
 };
