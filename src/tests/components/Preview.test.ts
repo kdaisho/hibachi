@@ -3,9 +3,9 @@ import { render } from 'svelte/server';
 import Preview from '$lib/components/Preview.svelte';
 
 describe('Preview', () => {
-	it('renders <div> with id="__svelte-email-preview"', () => {
+	it('renders <div> with id="__hibachi-preview"', () => {
 		const { body } = render(Preview, { props: { preview: 'Hello' } });
-		expect(body).toContain('id="__svelte-email-preview"');
+		expect(body).toContain('id="__hibachi-preview"');
 	});
 
 	it('has display:none style', () => {

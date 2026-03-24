@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render } from '$lib/render';
 import WelcomeEmail from './fixtures/WelcomeEmail.svelte';
 
-describe('migration from svelte-email', () => {
+describe('migration from hibachi', () => {
 	it('welcome email renders with DOCTYPE', () => {
 		const html = render({ template: WelcomeEmail });
 		expect(html).toContain('<!DOCTYPE html PUBLIC');
@@ -18,8 +18,8 @@ describe('migration from svelte-email', () => {
 
 	it('welcome email renders preview text', () => {
 		const html = render({ template: WelcomeEmail });
-		expect(html).toContain('Welcome to svelte-email');
-		expect(html).toContain('__svelte-email-preview');
+		expect(html).toContain('Welcome to hibachi');
+		expect(html).toContain('__hibachi-preview');
 	});
 
 	it('welcome email renders Container with MSO comments', () => {
@@ -30,7 +30,7 @@ describe('migration from svelte-email', () => {
 
 	it('welcome email renders dynamic firstName prop', () => {
 		const html = render({ template: WelcomeEmail, props: { firstName: 'Alice' } });
-		expect(html).toContain('Alice, welcome to svelte-email');
+		expect(html).toContain('Alice, welcome to hibachi');
 	});
 
 	it('welcome email renders Button with MSO padding', () => {
@@ -53,9 +53,9 @@ describe('migration from svelte-email', () => {
 
 	it('welcome email produces valid plain text', () => {
 		const text = render({ template: WelcomeEmail, options: { plainText: true } });
-		expect(text).toContain('John, welcome to svelte-email');
+		expect(text).toContain('John, welcome to hibachi');
 		expect(text).toContain('Happy coding!');
 		expect(text).not.toContain('<html');
-		expect(text).not.toContain('Welcome to svelte-email\n'); // preview should be stripped
+		expect(text).not.toContain('Welcome to hibachi\n'); // preview should be stripped
 	});
 });

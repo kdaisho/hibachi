@@ -49,7 +49,7 @@ describe('render integration', () => {
 		expect(html).toContain('Click me');
 		expect(html).toContain('<img');
 		expect(html).toContain('<hr');
-		expect(html).toContain('__svelte-email-preview');
+		expect(html).toContain('__hibachi-preview');
 	});
 
 	it('passes props through', () => {

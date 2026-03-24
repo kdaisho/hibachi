@@ -10,6 +10,6 @@
 	let { lang = 'en', children, ...rest }: Props = $props();
 </script>
 
-<html {...rest} id="__svelte-email" {lang}>
+<html {...rest} id="__hibachi" {lang}>
 	{@render children?.()}
 </html>

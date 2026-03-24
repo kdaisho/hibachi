@@ -9,9 +9,9 @@ describe('Html', () => {
 		expect(body).toContain('lang="en"');
 	});
 
-	it('renders with id="__svelte-email"', () => {
+	it('renders with id="__hibachi"', () => {
 		const { body } = render(Html);
-		expect(body).toContain('id="__svelte-email"');
+		expect(body).toContain('id="__hibachi"');
 	});
 
 	it('accepts custom lang prop', () => {

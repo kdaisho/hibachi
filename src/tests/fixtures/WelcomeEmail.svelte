@@ -54,7 +54,7 @@
 
 <Html lang="en">
 	<Head />
-	<Preview preview="Welcome to svelte-email" />
+	<Preview preview="Welcome to hibachi" />
 	<Section style={main}>
 		<Container style={container}>
 			<Img
@@ -63,12 +63,12 @@
 				style={logo}
 				width="200"
 				height="50" />
-			<Text style={paragraph}>{firstName}, welcome to svelte-email</Text>
+			<Text style={paragraph}>{firstName}, welcome to hibachi</Text>
 			<Text style={paragraph}>
 				A Svelte component library for building responsive emails
 			</Text>
 			<Section style={btnContainer}>
-				<Button pX={12} pY={12} style={button} href="https://github.com/carstenlebek/svelte-email">
+				<Button pX={12} pY={12} style={button} href="https://github.com/carstenlebek/hibachi">
 					View on GitHub
 				</Button>
 			</Section>

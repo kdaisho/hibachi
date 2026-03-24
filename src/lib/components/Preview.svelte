@@ -15,7 +15,7 @@
 </script>
 
 <div
-	id="__svelte-email-preview"
+	id="__hibachi-preview"
 	style={styleToString({
 		display: 'none',
 		overflow: 'hidden',

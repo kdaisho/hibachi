@@ -2,10 +2,10 @@
 	let { name = 'World' }: { name?: string } = $props();
 </script>
 
-<html id="__svelte-email" lang="en">
+<html id="__hibachi" lang="en">
 	<body>
 		<p>Hello, {name}!</p>
 		<img src="test.png" alt="test" />
-		<div id="__svelte-email-preview" style="display:none;">Preview text</div>
+		<div id="__hibachi-preview" style="display:none;">Preview text</div>
 	</body>
 </html>
