@@ -3,8 +3,20 @@
 	"version": "0.1.0",
 	"description": "Build emails with Svelte 5",
 	"author": {
-		"name": "Carsten Lebek"
+		"name": "kdaisho"
 	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kdaisho/hibachi"
+	},
+	"keywords": [
+		"svelte",
+		"svelte5",
+		"email",
+		"components",
+		"html-email"
+	],
 	"scripts": {
 		"dev": "vite dev",
 		"build": "svelte-kit sync && svelte-package",
