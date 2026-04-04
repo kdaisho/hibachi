@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="static/hibachi-banner-v2.png" alt="Hibachi - Svelte 5 email component library" width="600" />
+  <img src="static/hibachi-banner-v2.png" alt="Hibachi - Svelte 5 email component library" width="100%" />
 </p>
 
 <p align="center">

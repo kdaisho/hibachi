@@ -1,6 +1,6 @@
 {
 	"name": "hibachi",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "Svelte 5 component library for building and rendering responsive email templates",
 	"author": {
 		"name": "kdaisho"
