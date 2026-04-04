@@ -1,10 +1,12 @@
-# Hibachi
+<p align="center">
+  <img src="static/hibachi-banner-v2.png" alt="Hibachi - Svelte 5 email component library" width="600" />
+</p>
 
-Svelte 5 component library for building and rendering responsive email templates.
-
-[![npm version](https://img.shields.io/npm/v/hibachi)](https://www.npmjs.com/package/hibachi)
-[![license](https://img.shields.io/npm/l/hibachi)](https://github.com/kdaisho/hibachi/blob/master/LICENSE)
-[![downloads](https://img.shields.io/npm/dm/hibachi)](https://www.npmjs.com/package/hibachi)
+<p align="center">
+  <a href="https://www.npmjs.com/package/hibachi"><img src="https://img.shields.io/npm/v/hibachi" alt="npm version" /></a>
+  <a href="https://github.com/kdaisho/hibachi/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/hibachi" alt="license" /></a>
+  <a href="https://www.npmjs.com/package/hibachi"><img src="https://img.shields.io/npm/dm/hibachi" alt="downloads" /></a>
+</p>
 
 A Svelte 5 rewrite of [svelte-email](https://github.com/carstenlebek/svelte-email), updated for runes, snippets, and modern patterns. Written in TypeScript with full type definitions.
 
