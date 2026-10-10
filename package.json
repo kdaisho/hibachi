@@ -45,6 +45,7 @@
 		"vitest": "^3.0.0"
 	},
 	"type": "module",
+	"packageManager": "pnpm@9.4.0",
 	"dependencies": {
 		"html-to-text": "^9.0.3",
 		"pretty": "^2.0.0"
